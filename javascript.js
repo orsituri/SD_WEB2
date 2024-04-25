@@ -1,4 +1,4 @@
-let map = L.map('map').setView([58.373523, 26.716045], 12)
+const map = L.map('map').setView([58.373523, 26.716045], 12)
 const osm =
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
  maxZoom: 19,
@@ -28,6 +28,9 @@ function polygonStyle(feature) {
  opacity: 1,
  color: 'grey',
  }
+ function popUPinfo(feature, layer) {
+ layer.bindPopup(feature.properties.NIMI)
+}
 async function addDistrictsGeoJson(url) {
  const response = await fetch(url)
  const data = await response.json()
@@ -46,3 +49,6 @@ async function addCelltowersGeoJson(url) {
  markers.addTo(map)
 }
 addCelltowersGeoJson('tartu_city_celltowers_edu.geojson')
+ function defaultMapSettings() {
+  map.setView([58.373523, 26.716045], 12);
+}
